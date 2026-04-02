@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, ShieldCheck, CreditCard, Loader } from 'lucide-react';
 
-const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-
 const EnrollmentForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    parentName: '', email: '', phone: '', childName: '', grade: '6', slot: 'am'
+    firstName: '', lastName: '', parentName: '', email: '', phone: '', childName: '', grade: '6', slot: 'am', address: ''
   });
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,24 +17,25 @@ const EnrollmentForm = () => {
     setError('');
 
     try {
-      const res = await fetch(`${API}/payment/create`, {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
+      const response = await fetch(`${apiBase}/api/enroll`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      const data = await response.json();
 
-      if (!res.ok) throw new Error(data.message || 'Failed to create payment');
-
-      // Store registrationId for success page verification
-      sessionStorage.setItem('registrationId', data.registrationId);
-
-      // Redirect to Ottu checkout
-      window.location.href = data.checkout_url;
-
+      if (data.success && data.paymentUrl) {
+        // Redirect to Ottu Checkout Page
+        window.location.href = data.paymentUrl;
+      } else {
+        setError(data.message || 'Something went wrong. Please try again.');
+      }
     } catch (err) {
-      setError(err.message || 'Something went wrong. Please try again.');
+      console.error('Enrollment Error:', err);
+      setError('Could not connect to the server. Please check your internet connection.');
+    } finally {
       setLoading(false);
     }
   };
@@ -73,20 +72,24 @@ const EnrollmentForm = () => {
             <motion.form onSubmit={handleSubmit} key="form">
               <div className="form-grid">
                 <div className="input-group">
-                  <label>Parent's Name</label>
-                  <input name="parentName" type="text" required placeholder="Full Name" value={formData.parentName} onChange={handleChange} />
+                  <label>First Name</label>
+                  <input name="firstName" type="text" required placeholder="Student's First Name" value={formData.firstName} onChange={handleChange} />
+                </div>
+                <div className="input-group">
+                  <label>Last Name</label>
+                  <input name="lastName" type="text" required placeholder="Student's Last Name" value={formData.lastName} onChange={handleChange} />
                 </div>
                 <div className="input-group">
                   <label>Email Address</label>
                   <input name="email" type="email" required placeholder="example@mail.com" value={formData.email} onChange={handleChange} />
                 </div>
                 <div className="input-group">
-                  <label>WhatsApp Number</label>
+                  <label>Phone Number</label>
                   <input name="phone" type="tel" required placeholder="+91 XXXX XXXX" value={formData.phone} onChange={handleChange} />
                 </div>
                 <div className="input-group">
-                  <label>Child's Name</label>
-                  <input name="childName" type="text" required placeholder="First Name" value={formData.childName} onChange={handleChange} />
+                  <label>Parent Name</label>
+                  <input name="parentName" type="text" required placeholder="Full Name" value={formData.parentName} onChange={handleChange} />
                 </div>
                 <div className="input-group">
                   <label>Child's Grade</label>
@@ -100,6 +103,10 @@ const EnrollmentForm = () => {
                     <option value="am">Morning (10AM - 1PM)</option>
                     <option value="pm">Evening (2PM - 5PM)</option>
                   </select>
+                </div>
+                <div className="input-group" style={{ gridColumn: 'span 2' }}>
+                  <label>Address (Optional)</label>
+                  <input name="address" type="text" placeholder="Your current city or address" value={formData.address} onChange={handleChange} />
                 </div>
               </div>
 
