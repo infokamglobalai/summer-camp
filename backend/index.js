@@ -47,14 +47,26 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Backend is running!' });
 });
 
-// Database Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('✅ Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB Connection Error:', err.message);
-  });
+// Database Connection and Server Startup
+if (!process.env.MONGODB_URI) {
+  console.error('❌ CRITICAL: MONGODB_URI is not defined in environment variables.');
+  // We still start the server so the health check passes and logs can be reviewed
+}
+
+app.listen(PORT, async () => {
+  console.log(`🚀 Server listening on port ${PORT}`);
+  
+  if (process.env.MONGODB_URI) {
+    try {
+      await mongoose.connect(process.env.MONGODB_URI);
+      console.log('✅ Connected to MongoDB');
+    } catch (err) {
+      console.error('❌ MongoDB Connection Error:', err.message);
+    }
+  }
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.error('❌ Unhandled Rejection:', err.message);
+});
