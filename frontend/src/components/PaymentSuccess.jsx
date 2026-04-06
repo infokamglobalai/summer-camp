@@ -78,7 +78,7 @@ const PaymentSuccess = () => {
                     <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 5 }}>AI Adventure Bootcamp 2026 — 10 Days Journey</div>
                     <div style={{ fontSize: '0.85rem', color: '#64748b' }}>
                       <strong>Student:</strong> {registration?.firstName} {registration?.lastName} (Grade {registration?.grade})<br />
-                      <strong>Time Slot:</strong> {registration?.slot === 'am' ? 'Morning (10AM - 1PM)' : 'Evening (2PM - 5PM)'}
+                      <strong>Time Slot:</strong> {registration?.slot === 'am' ? 'Morning (10AM - 11:30AM)' : 'Evening (6PM - 7:30PM)'}
                     </div>
                   </td>
                   <td style={{ textAlign: 'right', padding: '25px 15px', fontWeight: 700, verticalAlign: 'top' }}>₹{registration?.amount}</td>

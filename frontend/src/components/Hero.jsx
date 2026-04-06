@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 const Hero = () => {
-  const heroImage = '/hero_portrait_green.png';
+  const heroImage = '/hero-summer-camp.jpeg';
 
   return (
     <section className="hero-section">
@@ -41,7 +41,7 @@ const Hero = () => {
             transition={{ duration: 0.9 }}
           >
             <div className="hero-image-frame">
-              <img src={heroImage} alt="AI Bootcamp Hero" className="hero-main-portrait" />
+              <img src={heroImage} alt="Students learning together with a laptop" className="hero-main-portrait" />
             </div>
           </motion.div>
         </div>

@@ -18,13 +18,26 @@ const EnrollmentForm = () => {
 
     try {
       const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiBase}/api/enroll`, {
+      const normalizedApiBase = apiBase.replace(/\/+$/, '');
+      const response = await fetch(`${normalizedApiBase}/api/enroll`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      let data = null;
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        throw new Error(`Unexpected response (${response.status}): ${text.slice(0, 120)}`);
+      }
+
+      if (!response.ok) {
+        setError(data?.message || `Request failed with status ${response.status}.`);
+        return;
+      }
 
       if (data.success && data.paymentUrl) {
         // Redirect to Ottu Checkout Page
@@ -34,7 +47,7 @@ const EnrollmentForm = () => {
       }
     } catch (err) {
       console.error('Enrollment Error:', err);
-      setError('Could not connect to the server. Please check your internet connection.');
+      setError('Unable to complete enrollment right now. Please try again in a moment.');
     } finally {
       setLoading(false);
     }
@@ -100,8 +113,8 @@ const EnrollmentForm = () => {
                 <div className="input-group">
                   <label>Time Slot</label>
                   <select name="slot" value={formData.slot} onChange={handleChange}>
-                    <option value="am">Morning (10AM - 1PM)</option>
-                    <option value="pm">Evening (2PM - 5PM)</option>
+                    <option value="am">Morning (10AM - 11:30AM)</option>
+                    <option value="pm">Evening (6PM - 7:30PM)</option>
                   </select>
                 </div>
                 <div className="input-group" style={{ gridColumn: 'span 2' }}>

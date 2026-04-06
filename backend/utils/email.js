@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
  */
 export const sendEnrollmentEmail = async (toEmail, studentName, slot) => {
   const meetingLink = "https://zoom.us/j/your-meeting-id"; // Placeholder link
-  const sessionTime = slot === 'am' ? "10:00 AM - 1:00 PM" : "2:00 PM - 5:00 PM";
+  const sessionTime = slot === 'am' ? "10:00 AM - 11:30 AM" : "6:00 PM - 7:30 PM";
 
   const mailOptions = {
     from: `"EduAiTutors | AI Adventure Camp" <${process.env.SMTP_USER}>`,
