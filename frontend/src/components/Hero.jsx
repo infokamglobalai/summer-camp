@@ -5,67 +5,46 @@ const Hero = () => {
 
   return (
     <section className="hero-section">
-      {/* Background Layer: Huge Bold Text & Curved Shape */}
-      <div className="hero-backdrop-shape"></div>
-      <div className="hero-bg-text-wrap">
-        <h2 className="hero-bg-boot">BOOT</h2>
-        <h2 className="hero-bg-camp">CAMP</h2>
-      </div>
+      <div className="hero-shell">
+        <div className="hero-grid-container">
+          <motion.div
+            className="hero-left"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h1 className="hero-title-refined">
+              Master <span className="hero-title-highlight">AI</span> in 10 Days <span aria-hidden="true">🚀</span>
+            </h1>
+            <p className="hero-subtitle-refined">
+              Join our live AI bootcamp and build real-world projects with expert guidance.
+            </p>
 
-      {/* 3-Column Grid: [Text | Portrait | Card] */}
-      <div className="container hero-grid-container">
+            <ul className="hero-benefits">
+              <li><span aria-hidden="true">🎮</span> Fun &amp; Interactive AI Learning</li>
+              <li><span aria-hidden="true">🤖</span> Build Real AI Projects</li>
+              <li><span aria-hidden="true">👨‍🏫</span> Guided by Expert Mentors</li>
+            </ul>
 
-        {/* LEFT: Text Content */}
-        <motion.div
-          className="hero-left"
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <h1 className="hero-title-refined">
-            AI Adventure<br />bootcamp
-          </h1>
-          <p className="hero-by-line">by eduaitutors</p>
-          <p className="hero-subtitle-refined">
-            Master artificial intelligence this summer.<br />
-            Enroll in our 10-day intensive journey.
-          </p>
-          <div className="hero-actions-refined">
-            <a href="#enroll" className="pill-btn">
-              <span>Enroll Now</span>
-              <span className="arrow-box">→</span>
-            </a>
-          </div>
-        </motion.div>
-
-        {/* CENTER: Portrait Image */}
-        <motion.div
-          className="hero-center"
-          initial={{ opacity: 0, scale: 0.9, y: 40 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <img src={heroImage} alt="AI Bootcamp Hero" className="hero-main-portrait" />
-        </motion.div>
-
-        {/* RIGHT: Mini Pricing Card */}
-        <motion.div
-          className="hero-right"
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <div className="hero-mini-card-refined">
-            <div className="mini-card-img-box">
-              <img src="/ai_art_explosion.png" alt="Card Preview" />
+            <div className="hero-actions-refined">
+              <a href="#enroll" className="pill-btn">Enroll Now</a>
+              <a href="#program" className="hero-btn-secondary">View Curriculum</a>
             </div>
-            <div className="mini-card-text">
-              <h4>AI Adventure</h4>
-              <p>₹199 <span>₹499</span></p>
-            </div>
-          </div>
-        </motion.div>
 
+            <p className="hero-urgency"><span aria-hidden="true">⚡</span> Starts April 15 | Limited Seats</p>
+          </motion.div>
+
+          <motion.div
+            className="hero-center"
+            initial={{ opacity: 0, scale: 0.94, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+          >
+            <div className="hero-image-frame">
+              <img src={heroImage} alt="AI Bootcamp Hero" className="hero-main-portrait" />
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
