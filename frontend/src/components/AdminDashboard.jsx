@@ -33,7 +33,9 @@ const AdminDashboard = () => {
         }
         const hint =
           res.status === 404
-            ? ` Not found (${url}). Is the backend running on port 5000 with admin routes? In dev, remove a wrong VITE_API_BASE_URL or restart Vite after vite.config proxy change.`
+            ? import.meta.env.DEV
+              ? ` Not found (${url}). Start backend on port 5000 with latest code, or fix VITE_API_BASE_URL / restart Vite after vite.config changes.`
+              : ` Not found (${url}). Redeploy the backend (App Runner) from latest main so /api/admin exists, and confirm VITE_API_BASE_URL is your backend URL—not the frontend host.`
             : '';
         throw new Error((data.message || `Request failed (${res.status})`) + hint);
       }
