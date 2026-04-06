@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, ShieldCheck, CreditCard, Loader } from 'lucide-react';
+import { getApiBaseUrl } from '../apiBase.js';
 
 const EnrollmentForm = () => {
   const [loading, setLoading] = useState(false);
@@ -17,8 +18,7 @@ const EnrollmentForm = () => {
     setError('');
 
     try {
-      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
-      const normalizedApiBase = apiBase.replace(/\/+$/, '');
+      const normalizedApiBase = getApiBaseUrl();
       const response = await fetch(`${normalizedApiBase}/api/enroll`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

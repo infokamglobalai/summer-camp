@@ -9,12 +9,14 @@ import Pricing from './components/Pricing';
 import EnrollmentForm from './components/EnrollmentForm';
 import Footer from './components/Footer';
 import PaymentSuccess from './components/PaymentSuccess';
+import AdminDashboard from './components/AdminDashboard';
 import './index.css';
 
 const getPage = () => {
-  const path = window.location.pathname;
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
   if (path === '/payment-success') return 'payment-success';
   if (path === '/payment-cancel') return 'payment-cancel';
+  if (path === '/admin') return 'admin';
   return 'home';
 };
 
@@ -23,6 +25,9 @@ function App() {
 
   // ── Payment Success Page ─────────────────────────────────
   if (page === 'payment-success') return <PaymentSuccess />;
+
+  // ── Admin dashboard ──────────────────────────────────────
+  if (page === 'admin') return <AdminDashboard />;
 
   // ── Payment Cancelled Page ───────────────────────────────
   if (page === 'payment-cancel') return (

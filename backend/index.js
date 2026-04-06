@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import enrollRoutes from './routes/enroll.js';
 import webhookRoutes from './routes/webhook.js';
+import adminRoutes from './routes/admin.js';
 
 dotenv.config();
 
@@ -33,14 +34,16 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST'],
-  credentials: true
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Admin-Key'],
 }));
 app.use(express.json());
 
 // Routes
 app.use('/api/enroll', enrollRoutes);
 app.use('/api/payment/ottu/webhook', webhookRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Health Check
 app.get('/health', (req, res) => {

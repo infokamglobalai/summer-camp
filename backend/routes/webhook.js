@@ -27,6 +27,9 @@ router.post('/', async (req, res) => {
     // 2. Update status if payment is successful
     if (status === 'success') {
       registration.status = 'success';
+      if (!registration.paidAt) {
+        registration.paidAt = new Date();
+      }
       await registration.save();
       
       console.log(`✅ Payment Successful for ${registration.firstName} ${registration.lastName}`);

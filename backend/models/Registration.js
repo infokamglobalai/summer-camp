@@ -19,7 +19,8 @@ const registrationSchema = new mongoose.Schema({
   status: { type: String, enum: ['pending', 'success', 'failed'], default: 'pending' },
   ottuSessionId: { type: String },
   paymentUrl: { type: String },
-  
+  paidAt: { type: Date },
+
   createdAt: { type: Date, default: Date.now }
 });
 

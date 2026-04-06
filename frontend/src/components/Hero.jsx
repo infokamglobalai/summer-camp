@@ -31,7 +31,7 @@ const Hero = () => {
               <a href="#program" className="hero-btn-secondary">View Curriculum</a>
             </div>
 
-            <p className="hero-urgency"><span aria-hidden="true">⚡</span> Starts April 15 | Limited Seats</p>
+            <p className="hero-urgency"><span aria-hidden="true">⚡</span> Starts April 27 | Limited Seats</p>
           </motion.div>
 
           <motion.div
