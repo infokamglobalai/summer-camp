@@ -8,10 +8,10 @@ const router = express.Router();
 // Generate a professional Enrollment with Ottu Payment Session
 router.post('/', async (req, res) => {
   try {
-    const { firstName, lastName, parentName, email, phone, grade, slot, address, country, state, city } = req.body;
+    const { firstName, lastName, parentName, email, phone, grade, slot, address, country, countryCode, state, city } = req.body;
     
     // 1. Determine Pricing and PG Code
-    const isIndia = country === 'India' || country === 'IN';
+    const isIndia = countryCode === 'IN' || country === 'India' || country === 'IN';
     const amount = isIndia ? "199.00" : "10.00";
     const currency = isIndia ? "INR" : "USD";
     const pg_code = isIndia ? (process.env.OTTU_PG_CODE_INR || "payu") : (process.env.OTTU_PG_CODE_USD || "eduaiusd");
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
         city: city || "Hyderabad",
         line1: address || "Educational Services",
         state: state || "Telangana",
-        country: isIndia ? "IN" : country,
+        country: countryCode || (isIndia ? "IN" : "US"),
         postal_code: "500001"
       },
       // Webhook and Redirect URLs
@@ -87,7 +87,7 @@ router.post('/', async (req, res) => {
     console.error('Enrollment Error:', error.response?.data || error.message);
     res.status(500).json({ 
       success: false, 
-      message: 'Failed to create payment session. Please try again later.' 
+      message: error.response?.data || error.message || 'Failed to create payment session.' 
     });
   }
 });

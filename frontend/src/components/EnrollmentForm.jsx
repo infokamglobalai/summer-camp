@@ -94,6 +94,7 @@ const EnrollmentForm = ({ countryCode }) => {
       const payload = {
         ...formData,
         country: countryName,
+        countryCode: formData.country,
         state: states.find(s => s.isoCode === formData.state)?.name || formData.state,
       };
 
