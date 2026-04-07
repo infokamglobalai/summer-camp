@@ -61,7 +61,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Hero />
+      <Hero countryCode={countryCode} />
       <TrustBanner />
       <Highlights />
       <Schedule />

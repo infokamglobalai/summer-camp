@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Star } from 'lucide-react';
 
-const Hero = () => {
+const Hero = ({ countryCode }) => {
   const heroImage = '/hero-summer-camp.jpeg';
+  const isIndia = countryCode === 'IN';
+  const displayPrice = isIndia ? '₹199' : '$10';
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,7 +62,7 @@ const Hero = () => {
             </motion.ul>
 
             <motion.div className="hero-actions-refined" variants={itemVariants}>
-              <a href="#enroll" className="pill-btn">Start Learning — ₹199</a>
+              <a href="#enroll" className="pill-btn">Start Learning — {displayPrice}</a>
               <a href="#program" className="hero-btn-secondary">Explore Curriculum</a>
             </motion.div>
 
