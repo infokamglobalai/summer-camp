@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
-import { GraduationCap, Menu, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="navbar">
+    <motion.nav 
+      className={`navbar ${scrolled ? 'scrolled glass' : ''}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container nav-container">
         <a href="/" className="logo-group">
           <img src="/logo-eduaitutors.png" alt="EduAiTutors Logo" className="nav-logo-img" />
@@ -30,7 +43,7 @@ const Navbar = () => {
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

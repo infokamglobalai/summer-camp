@@ -8,6 +8,9 @@ const registrationSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   parentName: { type: String, required: true },
   grade: { type: String, required: true },
+  country: { type: String, required: true },
+  state: { type: String, required: true },
+  city: { type: String, required: true },
   slot: { type: String, required: true },
   address: { type: String },
   

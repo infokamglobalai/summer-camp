@@ -6,7 +6,7 @@ const Schedule = () => {
   const sessions = [
     {
       title: "Morning Session",
-      time: "10:00 AM - 11:30 AM",
+      time: "10:00 AM - 11:30 AM (IST)",
       image: "/morning_session.png",
       icon: <Sun size={24} className="icon-morning" />,
       iconBg: "#FEF3C7",
@@ -19,7 +19,7 @@ const Schedule = () => {
     },
     {
       title: "Evening Session",
-      time: "6:00 PM - 7:30 PM",
+      time: "6:00 PM - 7:30 PM (IST)",
       image: "/evening_session.png",
       icon: <Moon size={24} className="icon-evening" />,
       iconBg: "#E0E7FF",

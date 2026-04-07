@@ -34,24 +34,34 @@ const Highlights = () => {
   ];
 
   return (
-    <section className="highlights-section section" id="highlights">
+    <section className="highlights-section section mesh-bg" id="highlights">
       <div className="container">
-        <div className="section-header">
+        <motion.div 
+          className="section-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="section-title">Program Highlights</h2>
           <p className="section-subtitle">
             Four exciting learning pathways designed to ignite creativity and innovation
           </p>
-        </div>
+        </motion.div>
 
         <div className="highlights-grid">
           {highlights.map((item, index) => (
             <motion.div 
               key={index}
-              className="highlight-card"
+              className="highlight-card glass"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ 
+                y: -10,
+                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
+              }}
             >
               <div className="card-image-box">
                 <img src={item.image} alt={item.title} className="card-image" />
@@ -67,8 +77,6 @@ const Highlights = () => {
           ))}
         </div>
       </div>
-
-      
     </section>
   );
 };

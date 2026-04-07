@@ -1,48 +1,87 @@
 import { motion } from 'framer-motion';
+import { Sparkles, Star } from 'lucide-react';
 
 const Hero = () => {
   const heroImage = '/hero-summer-camp.jpeg';
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const floatAnimation = {
+    y: [0, -10, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
   return (
-    <section className="hero-section">
+    <section className="hero-section mesh-bg">
       <div className="hero-shell">
         <div className="hero-grid-container">
           <motion.div
             className="hero-left"
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            <h1 className="hero-title-refined">
-              Master <span className="hero-title-highlight">AI</span> in 10 Days <span aria-hidden="true">🚀</span>
-            </h1>
-            <p className="hero-subtitle-refined">
-              Join our live AI bootcamp and build real-world projects with expert guidance.
-            </p>
+            <motion.div variants={itemVariants} className="hero-badge">
+              <Sparkles size={16} color="#008A5E" /> <span>Next Batch: April 27</span>
+            </motion.div>
 
-            <ul className="hero-benefits">
-              <li><span aria-hidden="true">🎮</span> Fun &amp; Interactive AI Learning</li>
-              <li><span aria-hidden="true">🤖</span> Build Real AI Projects</li>
-              <li><span aria-hidden="true">👨‍🏫</span> Guided by Expert Mentors</li>
-            </ul>
+            <motion.h1 className="hero-title-refined" variants={itemVariants}>
+              Empower Your <span className="hero-title-highlight">AI Future</span> in 10 Days
+            </motion.h1>
 
-            <div className="hero-actions-refined">
-              <a href="#enroll" className="pill-btn">Enroll Now</a>
-              <a href="#program" className="hero-btn-secondary">View Curriculum</a>
-            </div>
+            <motion.p className="hero-subtitle-refined" variants={itemVariants}>
+              Unlock the power of Artificial Intelligence through hands-on projects, 
+              live mentorship, and a global community of young innovators.
+              <span className="hero-global-badge">🌍 Join students from 10+ countries!</span>
+            </motion.p>
 
-            <p className="hero-urgency"><span aria-hidden="true">⚡</span> Starts April 27 | Limited Seats</p>
+            <motion.ul className="hero-benefits" variants={itemVariants}>
+              <li><Star size={18} className="star-icon" /> <span>Build Real-World AI Applications</span></li>
+              <li><Star size={18} className="star-icon" /> <span>Learn from Industry Pioneers</span></li>
+              <li><Star size={18} className="star-icon" /> <span>Earn a Global Certificate</span></li>
+            </motion.ul>
+
+            <motion.div className="hero-actions-refined" variants={itemVariants}>
+              <a href="#enroll" className="pill-btn">Start Learning — ₹199</a>
+              <a href="#program" className="hero-btn-secondary">Explore Curriculum</a>
+            </motion.div>
+
+            <motion.p className="hero-urgency" variants={itemVariants}>
+              Register now to join 500+ successful alumni.
+            </motion.p>
           </motion.div>
 
           <motion.div
             className="hero-center"
-            initial={{ opacity: 0, scale: 0.94, y: 30 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="hero-image-frame">
-              <img src={heroImage} alt="Students learning together with a laptop" className="hero-main-portrait" />
-            </div>
+            <motion.div 
+              className="hero-image-frame"
+              animate={floatAnimation}
+              whileHover={{ scale: 1.02 }}
+            >
+              <img src={heroImage} alt="Students learning AI" className="hero-main-portrait" />
+            </motion.div>
           </motion.div>
         </div>
       </div>

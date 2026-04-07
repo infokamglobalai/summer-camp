@@ -16,38 +16,26 @@ const Footer = () => {
             <div className="footer-logo-group">
               <img src="/logo-eduaitutors.png" alt="EduAiTutors Logo" className="footer-logo-img" />
             </div>
-            <p className="footer-desc">
-              Empowering young minds to explore, create, and innovate with artificial intelligence.
-            </p>
+            {/* Description removed for radical reduction */}
           </div>
 
           <div className="footer-contact">
-            <h4 className="footer-heading">CONTACT SUPPORT</h4>
-            <ul className="contact-list">
-              <li><Phone size={18} color="#FF8C00" /> <span>+91 80507 66363</span></li>
-              <li><Mail size={18} color="#FF8C00" /> <span>info@eduaitutors.com</span></li>
-              <li><Mail size={18} color="#FF8C00" /> <span>info@kamglobalai.com</span></li>
-              <li><Mail size={18} color="#FF8C00" /> <span>info@kiccpa.com</span></li>
+            <h4 className="footer-heading">CONTACT Support</h4>
+            <ul className="contact-list contact-list-compact">
+              <li><Phone size={16} color="#FF8C00" /> <span>+91 80507 66363</span></li>
+              <li><Mail size={16} color="#FF8C00" /> <span>info@eduaitutors.com</span></li>
+              <li><Mail size={16} color="#FF8C00" /> <span>info@kamglobalai.com</span></li>
+              <li><Mail size={16} color="#FF8C00" /> <span>info@kiccpa.com</span></li>
               <li className="address-item">
-                <MapPin size={18} color="#FF8C00" /> 
-                <div className="address-block">
-                  <strong>INDIA</strong>
-                  <span>RT Nagar, Bengaluru, KA</span>
-                </div>
-              </li>
-              <li className="address-item">
-                <MapPin size={18} color="#FF8C00" /> 
-                <div className="address-block">
-                  <strong>KUWAIT</strong>
-                  <span>Block 4, Tunisia St., Hawally</span>
-                </div>
+                <MapPin size={16} color="#FF8C00" /> 
+                <span className="compact-address">RT Nagar, Bengaluru | Hawally, Kuwait</span>
               </li>
             </ul>
           </div>
 
           <div className="footer-links">
-            <h4 className="footer-heading">Quick Links</h4>
-            <ul className="links-list">
+            <h4 className="footer-heading">QUICK LINKS</h4>
+            <ul className="links-list links-list-compact">
               <li><a href="#about">About</a></li>
               <li><a href="#highlights">Program</a></li>
               <li><a href="#schedule">Schedule</a></li>
@@ -56,13 +44,13 @@ const Footer = () => {
           </div>
 
           <div className="footer-social">
-            <h4 className="footer-heading">CONNECT WITH US</h4>
-            <div className="social-list-vertical">
-              <a href="#"><FacebookIcon size={18} /> <span>Facebook</span></a>
-              <a href="#"><InstagramIcon size={18} /> <span>Instagram</span></a>
-              <a href="#"><XIcon size={18} /> <span>X (Twitter)</span></a>
-              <a href="#"><YoutubeIcon size={18} /> <span>YouTube</span></a>
-              <a href="#"><LinkedinIcon size={18} /> <span>LinkedIn</span></a>
+            <h4 className="footer-heading">SOCIAL MEDIA</h4>
+            <div className="social-list-compact">
+              <a href="https://www.facebook.com/profile.php?id=61588340534365" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon size={18} /></a>
+              <a href="https://www.instagram.com/eduaitutors/" target="_blank" rel="noopener noreferrer" title="Instagram"><InstagramIcon size={18} /></a>
+              <a href="https://x.com/EduAiTutors" target="_blank" rel="noopener noreferrer" title="X"><XIcon size={18} /></a>
+              <a href="https://www.youtube.com/channel/UC459T_c2E92Lo-7BVJvpzEA" target="_blank" rel="noopener noreferrer" title="YouTube"><YoutubeIcon size={18} /></a>
+              <a href="https://www.linkedin.com/showcase/eduaitutors/about/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><LinkedinIcon size={18} /></a>
             </div>
           </div>
         </div>

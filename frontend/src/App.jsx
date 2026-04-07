@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import TrustBanner from './components/TrustBanner';
 import Highlights from './components/Highlights';
 import Schedule from './components/Schedule';
 import Program from './components/Program';
+import CertificateSection from './components/CertificateSection';
 import WhyFamilies from './components/WhyFamilies';
 import Pricing from './components/Pricing';
+import FAQ from './components/FAQ';
 import EnrollmentForm from './components/EnrollmentForm';
 import Footer from './components/Footer';
 import PaymentSuccess from './components/PaymentSuccess';
@@ -22,6 +25,22 @@ const getPage = () => {
 
 function App() {
   const page = getPage();
+  const [countryCode, setCountryCode] = useState('IN');
+
+  useEffect(() => {
+    const detectCountry = async () => {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        if (data.country_code) {
+          setCountryCode(data.country_code);
+        }
+      } catch (err) {
+        console.warn('IP detection failed, defaulting to India:', err);
+      }
+    };
+    detectCountry();
+  }, []);
 
   // ── Payment Success Page ─────────────────────────────────
   if (page === 'payment-success') return <PaymentSuccess />;
@@ -43,12 +62,15 @@ function App() {
     <div className="App">
       <Navbar />
       <Hero />
+      <TrustBanner />
       <Highlights />
       <Schedule />
       <Program />
+      <CertificateSection />
       <WhyFamilies />
-      <Pricing />
-      <EnrollmentForm />
+      <Pricing countryCode={countryCode} />
+      <FAQ />
+      <EnrollmentForm countryCode={countryCode} />
       <Footer />
     </div>
   );
