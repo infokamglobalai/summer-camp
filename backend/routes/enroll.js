@@ -2,6 +2,7 @@ import express from 'express';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Registration from '../models/Registration.js';
+import { sendRegistrationReceivedEmail } from '../utils/email.js';
 
 const router = express.Router();
 
@@ -76,6 +77,15 @@ router.post('/', async (req, res) => {
     });
     
     await registration.save();
+
+    // 6. Send Registration Received Email (Asynchronous)
+    sendRegistrationReceivedEmail(
+      email, 
+      `${firstName} ${lastName}`, 
+      amount, 
+      currency, 
+      ottuResponse.data.checkout_url
+    ).catch(err => console.error('Delayed Email Error:', err));
 
     // 5. Send the payment URL back to the frontend
     res.status(200).json({ 

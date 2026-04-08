@@ -71,3 +71,57 @@ export const sendEnrollmentEmail = async (toEmail, studentName, slot) => {
     return false;
   }
 };
+
+/**
+ * Send Registration Received Email (Pending Payment)
+ * @param {string} toEmail - Student/Parent Email
+ * @param {string} studentName - Student's Name
+ * @param {string} amount - Amount to pay
+ * @param {string} currency - Currency (INR/USD)
+ * @param {string} paymentUrl - Link to complete payment
+ */
+export const sendRegistrationReceivedEmail = async (toEmail, studentName, amount, currency, paymentUrl) => {
+  const mailOptions = {
+    from: `"EduAiTutors | AI Adventure Camp" <${process.env.SMTP_USER}>`,
+    to: toEmail,
+    subject: `Registration Received - AI Adventure Camp 2026`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;">
+        <div style="background-color: #333; padding: 40px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px;">Registration Received!</h1>
+        </div>
+        <div style="padding: 40px; color: #333; line-height: 1.6;">
+          <p>Dear <strong>${studentName}</strong>,</p>
+          <p>Thank you for registering for the <strong>AI Adventure Bootcamp 2026</strong>! We have received your details.</p>
+          
+          <div style="background-color: #f9f9f9; padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #008A5E;">
+            <h3 style="margin-top: 0; color: #008A5E;">💳 Complete Your Enrollment</h3>
+            <p>To secure your spot in the bootcamp, please complete your payment of <strong>${currency} ${amount}</strong>.</p>
+            <p style="margin: 20px 0;">
+              <a href="${paymentUrl}" style="background-color: #008A5E; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Pay Now & Confirm Enrollment</a>
+            </p>
+            <p style="font-size: 0.9rem; color: #666;">If you have already paid, please ignore this email. You will receive a confirmation email with class details shortly.</p>
+          </div>
+
+          <p>Once your payment is confirmed, you will receive your unique Zoom meeting link and session schedule.</p>
+          
+          <p>If you have any questions, feel free to reply to this email.</p>
+          
+          <p>Best Regards,<br/><strong>Team EduAiTutors</strong></p>
+        </div>
+        <div style="background-color: #f4f4f4; padding: 20px; text-align: center; color: #888; font-size: 12px;">
+          © 2026 EduAiTutors | Educational Innovation
+        </div>
+      </div>
+    `
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Registration Email sent: ' + info.response);
+    return true;
+  } catch (error) {
+    console.error('❌ Registration Email sending failed:', error);
+    return false;
+  }
+};
