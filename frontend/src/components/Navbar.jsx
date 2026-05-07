@@ -30,6 +30,7 @@ const Navbar = () => {
           <a href="#schedule" onClick={() => setIsOpen(false)}>Schedule</a>
           <a href="#program" onClick={() => setIsOpen(false)}>10-Day Journey</a>
           <a href="#pricing" onClick={() => setIsOpen(false)}>Pricing</a>
+          <a href="/feedback" onClick={() => setIsOpen(false)}>Share your experience</a>
           <a href="#enroll" className="btn btn-primary nav-btn-mobile" onClick={() => setIsOpen(false)}>
             Enroll Now
           </a>

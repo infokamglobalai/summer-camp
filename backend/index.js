@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import enrollRoutes from './routes/enroll.js';
 import webhookRoutes from './routes/webhook.js';
 import adminRoutes from './routes/admin.js';
+import feedbackRoutes from './routes/feedback.js';
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ app.use(express.json());
 app.use('/api/enroll', enrollRoutes);
 app.use('/api/payment/ottu/webhook', webhookRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 // Health Check
 app.get('/health', (req, res) => {

@@ -13,6 +13,8 @@ import EnrollmentForm from './components/EnrollmentForm';
 import Footer from './components/Footer';
 import PaymentSuccess from './components/PaymentSuccess';
 import AdminDashboard from './components/AdminDashboard';
+import FeedbackForm from './components/FeedbackForm';
+import FeedbackSuccess from './components/FeedbackSuccess';
 import './index.css';
 
 const getPage = () => {
@@ -20,6 +22,8 @@ const getPage = () => {
   if (path === '/payment-success') return 'payment-success';
   if (path === '/payment-cancel') return 'payment-cancel';
   if (path === '/admin') return 'admin';
+  if (path === '/feedback') return 'feedback';
+  if (path === '/feedback-success') return 'feedback-success';
   return 'home';
 };
 
@@ -47,6 +51,12 @@ function App() {
 
   // ── Admin dashboard ──────────────────────────────────────
   if (page === 'admin') return <AdminDashboard />;
+
+  // ── Feedback Form ────────────────────────────────────────
+  if (page === 'feedback') return <FeedbackForm />;
+
+  // ── Feedback Success ─────────────────────────────────────
+  if (page === 'feedback-success') return <FeedbackSuccess />;
 
   // ── Payment Cancelled Page ───────────────────────────────
   if (page === 'payment-cancel') return (
